@@ -1,26 +1,27 @@
-import type { Component } from "solid-js";
+import { Component, createSignal, For } from "solid-js";
 
-import logo from "./logo.svg";
-import styles from "./App.module.css";
+import AppDarkLogo from "./assets/logo-dark.svg";
+import Item from "./components/navbar/Item";
+import ToggleTheme from "./components/navbar/ToggleTheme";
 
 const App: Component = () => {
+  const totalBoards = 3; // soon backend response
+  const boards = ["Platform Launch", "Marketing Plan", "Roadmap"];
+
   return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
-      <div class="text-3xl underline"> hola care hola</div>
+    <div class="bg-light-grey">
+      <nav class="flex h-screen w-fit flex-col justify-between bg-white shadow-lg shadow-lines-light">
+        <div>
+          <img class="ml-9 mt-8" src={AppDarkLogo} alt="Application Logo" />
+          <h2 class="ml-9 mt-14 mb-5 text-xs font-bold text-medium-grey">
+            ALL BOARDS ({totalBoards})
+          </h2>
+          <For each={boards}>{(board) => <Item sectionTitle={board} />}</For>
+        </div>
+        <div>
+          <ToggleTheme />
+        </div>
+      </nav>
     </div>
   );
 };
