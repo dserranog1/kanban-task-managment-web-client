@@ -1,4 +1,4 @@
-import { Component, createSignal, For } from "solid-js";
+import { Component, For } from "solid-js";
 
 import AppDarkLogo from "./assets/logo-dark.svg";
 import Item from "./components/navbar/Item";
