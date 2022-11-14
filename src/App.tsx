@@ -20,6 +20,7 @@ const App: Component = () => {
           Learn Solid
         </a>
       </header>
+      <div class="text-3xl underline"> hola care hola</div>
     </div>
   );
 };
