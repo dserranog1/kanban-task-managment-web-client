@@ -2,9 +2,8 @@ import { A } from "@solidjs/router";
 import { Component } from "solid-js";
 import { useMatch } from "@solidjs/router";
 import slugify from "slugify";
-import IconBoard from "../../assets/icon-board.svg";
-import IconBoardWhite from "../../assets/icon-board-white.svg";
 import { classNames } from "../../utils/conditionalStyles";
+import BoardIcon from "./icons/BoardIcon";
 
 interface Props {
   sectionTitle: string;
@@ -19,14 +18,20 @@ const Item: Component<Props> = (props) => {
     <A href={slugifiedTitle()}>
       <div
         class={classNames(
-          "flex flex-row items-center gap-2 py-4 pl-9",
+          "flex flex-row items-center gap-2 py-4 pl-9 ",
           match()
             ? "mr-6 rounded-tr-full rounded-br-full bg-main-purple text-white"
-            : "text-medium-grey"
+            : "group text-medium-grey hover:mr-6 hover:rounded-br-full hover:rounded-tr-full hover:bg-navbar-hover"
         )}
       >
-        <img src={match() ? IconBoardWhite : IconBoard} alt="Board Icon" />
-        <h3 class="text-md font-bold">{props.sectionTitle}</h3>
+        {match() ? (
+          <BoardIcon classes="fill-white" />
+        ) : (
+          <BoardIcon classes="fill-medium-grey group-hover:fill-main-purple" />
+        )}
+        <h3 class="text-md font-bold group-hover:text-main-purple">
+          {props.sectionTitle}
+        </h3>
       </div>
     </A>
   );

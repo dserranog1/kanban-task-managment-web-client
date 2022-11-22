@@ -1,38 +1,43 @@
-import { Component, createSignal, For, Show } from "solid-js";
+import { Component, For, Show, useContext } from "solid-js";
 import { Motion, Presence } from "@motionone/solid";
 
 import AppDarkLogo from "../../assets/logo-dark.svg";
 import Item from "./Item";
 import ToggleTheme from "./ToggleTheme";
-import HideSideBar from "../../assets/icon-hide-sidebar.svg";
 import ShowSideBar from "../../assets/icon-show-sidebar.svg";
+import HideSideBarIcon from "./icons/HideSideBarIcon";
+import { NavbarContext } from "./NavbarProvider";
 
 const NavBar: Component = () => {
-  const [navBarDidShow, setNavBarDidShow] = createSignal(true);
-  const [navBarDidHide, setNavBarDidHide] = createSignal(false);
-
   const totalBoards = 3; // soon backend response
   const boards = ["Platform Launch", "Marketing Plan", "Roadmap"];
 
+  const [state, { setNavBarDidHide, setNavBarDidShow }] =
+    useContext(NavbarContext);
+
+  console.log(state.navBarDidShow);
+
   const navBarIsHiding = () => {
-    setNavBarDidShow(false);
+    setNavBarDidShow && setNavBarDidShow(false);
   };
 
   const navBarIsShowing = () => {
-    setNavBarDidHide(false);
+    setNavBarDidHide && setNavBarDidHide(false);
   };
 
   return (
     <>
       <Presence>
-        <Show when={navBarDidShow()}>
+        <Show when={state.navBarDidShow}>
           <Motion.nav
             initial={{ transform: "translateX(-300px)" }}
             animate={{ transform: "translateX(0px)" }}
             exit={{ transform: "translateX(-300px)" }}
             transition={{ duration: 0.5 }}
-            onMotionComplete={() => !navBarDidShow() && setNavBarDidHide(true)}
-            class="flex h-screen w-fit flex-col justify-between bg-white shadow-lg shadow-lines-light"
+            onMotionComplete={() =>
+              !state.navBarDidShow && setNavBarDidHide && setNavBarDidHide(true)
+            }
+            class="flex h-screen min-w-fit flex-col justify-between bg-white shadow-lg shadow-lines-light"
           >
             <div>
               <img class="mt-8 ml-9" src={AppDarkLogo} alt="Application Logo" />
@@ -47,27 +52,31 @@ const NavBar: Component = () => {
               <ToggleTheme />
               <button
                 onClick={() => navBarIsHiding()}
-                class="ml-9 flex flex-row items-center gap-2"
+                class="group flex flex-row items-center gap-2 py-4 pl-9 hover:mr-6 hover:rounded-tr-full hover:rounded-br-full hover:bg-navbar-hover"
               >
-                <img src={HideSideBar} alt="Hide Side Bar Button" />
-                <p class="text-md text-medium-grey">Hide Sidebar</p>
+                <HideSideBarIcon classes="fill-medium-grey group-hover:fill-main-purple" />
+                <p class="text-md text-medium-grey group-hover:text-main-purple">
+                  Hide Sidebar
+                </p>
               </button>
             </div>
           </Motion.nav>
         </Show>
       </Presence>
       <Presence>
-        <Show when={navBarDidHide()}>
+        <Show when={state.navBarDidHide}>
           <Motion.div
             initial={{ transform: "translateX(-300px)" }}
             animate={{ transform: "translateX(0px)" }}
             exit={{ transform: "translateX(-300px)" }}
             transition={{ duration: 0.5 }}
-            onMotionComplete={() => !navBarDidHide() && setNavBarDidShow(true)}
-            class="mb-8 flex h-screen w-fit flex-col justify-end pb-8"
+            onMotionComplete={() =>
+              !state.navBarDidHide && setNavBarDidShow && setNavBarDidShow(true)
+            }
+            class="absolute bottom-8 w-fit"
           >
             <button
-              class="rounded-tr-full rounded-br-full bg-main-purple p-5"
+              class="rounded-tr-full rounded-br-full bg-main-purple p-5 hover:bg-main-purple-hover"
               onClick={() => navBarIsShowing()}
             >
               <img src={ShowSideBar} alt="Show Side Bar Button" class="h-3" />

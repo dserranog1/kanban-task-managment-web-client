@@ -10,8 +10,11 @@ module.exports = {
       colors: {
         "medium-grey": "#828FA3",
         "main-purple": "#635FC7",
+        "main-purple-hover": "#A8A4FF",
+        "navbar-hover": "#F0EFFA",
         "light-grey": "#F4F7FD",
         "lines-light": "#E4EBFA",
+        "light-dark": "#000112",
       },
       fontSize: {
         md: [
