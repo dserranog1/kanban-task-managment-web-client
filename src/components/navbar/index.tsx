@@ -14,14 +14,12 @@ const NavBar: Component = () => {
 
   const [state, { setNavBarDidHide, setNavBarDidShow }] = useNavBarContext();
 
-  console.log(state.navBarDidShow);
-
   const navBarIsHiding = () => {
-    setNavBarDidShow && setNavBarDidShow(false);
+    setNavBarDidShow(false);
   };
 
   const navBarIsShowing = () => {
-    setNavBarDidHide && setNavBarDidHide(false);
+    setNavBarDidHide(false);
   };
 
   return (
@@ -34,7 +32,7 @@ const NavBar: Component = () => {
             exit={{ transform: "translateX(-300px)" }}
             transition={{ duration: 0.5 }}
             onMotionComplete={() =>
-              !state.navBarDidShow && setNavBarDidHide && setNavBarDidHide(true)
+              !state.navBarDidShow && setNavBarDidHide(true)
             }
             class="flex h-screen min-w-fit flex-col justify-between bg-white shadow-lg shadow-lines-light"
           >
@@ -70,7 +68,7 @@ const NavBar: Component = () => {
             exit={{ transform: "translateX(-300px)" }}
             transition={{ duration: 0.5 }}
             onMotionComplete={() =>
-              !state.navBarDidHide && setNavBarDidShow && setNavBarDidShow(true)
+              !state.navBarDidHide && setNavBarDidShow(true)
             }
             class="absolute bottom-8 w-fit"
           >

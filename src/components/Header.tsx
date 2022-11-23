@@ -6,7 +6,7 @@ import { useNavBarContext } from "./navbar/NavbarProvider";
 
 const Header: Component = () => {
   const params = useParams();
-  const [state, { setNavBarDidShow }] = useNavBarContext();
+  const [state] = useNavBarContext();
   return (
     <div class="flex h-[6.5vh] min-h-fit w-full flex-row items-center justify-between bg-white pl-6 pr-8">
       <div class="mt-7 mb-9 flex h-full flex-row items-center gap-8">
@@ -22,7 +22,7 @@ const Header: Component = () => {
         </h1>
       </div>
       <div class="flex flex-row">
-        <button onClick={() => setNavBarDidShow(false)}>askfjkas</button>
+        <button>askfjkas</button>
         <h2>aksdjfkasd</h2>
       </div>
     </div>

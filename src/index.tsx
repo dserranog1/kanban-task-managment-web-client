@@ -4,11 +4,14 @@ import { Router } from "@solidjs/router";
 
 import "./index.css";
 import App from "./App";
+import { NavbarProvider } from "./components/navbar/NavbarProvider";
 
 render(
   () => (
     <Router>
-      <App />
+      <NavbarProvider>
+        <App />
+      </NavbarProvider>
     </Router>
   ),
   document.getElementById("root") as HTMLElement
