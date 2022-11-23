@@ -1,4 +1,4 @@
-import { Component, For, Show, useContext } from "solid-js";
+import { Component, For, Show } from "solid-js";
 import { Motion, Presence } from "@motionone/solid";
 
 import AppDarkLogo from "../../assets/logo-dark.svg";
@@ -6,14 +6,13 @@ import Item from "./Item";
 import ToggleTheme from "./ToggleTheme";
 import ShowSideBar from "../../assets/icon-show-sidebar.svg";
 import HideSideBarIcon from "./icons/HideSideBarIcon";
-import { NavbarContext } from "./NavbarProvider";
+import { useNavBarContext } from "./NavbarProvider";
 
 const NavBar: Component = () => {
   const totalBoards = 3; // soon backend response
   const boards = ["Platform Launch", "Marketing Plan", "Roadmap"];
 
-  const [state, { setNavBarDidHide, setNavBarDidShow }] =
-    useContext(NavbarContext);
+  const [state, { setNavBarDidHide, setNavBarDidShow }] = useNavBarContext();
 
   console.log(state.navBarDidShow);
 
