@@ -6,7 +6,7 @@ import Item from "./Item";
 import ToggleTheme from "./ToggleTheme";
 import ShowSideBar from "../../assets/icon-show-sidebar.svg";
 import HideSideBarIcon from "./icons/HideSideBarIcon";
-import { useNavBarContext } from "./NavbarProvider";
+import { useNavBarContext } from "../../providers/NavbarProvider";
 
 const NavBar: Component = () => {
   const totalBoards = 3; // soon backend response

@@ -15,6 +15,8 @@ module.exports = {
         "light-grey": "#F4F7FD",
         "lines-light": "#E4EBFA",
         "light-dark": "#000112",
+        "very-dark-gray": "#20212C",
+        "dark-gray": "#2B2C37",
       },
       fontSize: {
         md: [

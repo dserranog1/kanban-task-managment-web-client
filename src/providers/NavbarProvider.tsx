@@ -3,20 +3,31 @@ import { createStore } from "solid-js/store";
 
 const makeNavBarContext = (
   initialNavBarDidShow = true,
-  initialNavBarDidHide = false
+  initialNavBarDidHide = false,
+  initialAnimating = true
 ) => {
   const [state, setState] = createStore({
     navBarDidShow: initialNavBarDidShow,
     navBarDidHide: initialNavBarDidHide,
+    animating: initialAnimating,
   });
   return [
     state,
     {
       setNavBarDidHide(newState: boolean) {
+        if (!newState) {
+          setState("animating", true);
+        }
         setState("navBarDidHide", newState);
       },
       setNavBarDidShow(newState: boolean) {
+        if (!newState) {
+          setState("animating", true);
+        }
         setState("navBarDidShow", newState);
+      },
+      setNavBarAnimating(newState: boolean) {
+        setState("animating", newState);
       },
     },
   ] as const;
@@ -35,16 +46,26 @@ export const NavbarProvider: Component<Props> = (props) => {
   const [state, setState] = createStore({
     navBarDidShow: true,
     navBarDidHide: false,
+    animating: true,
   });
 
   const navbar: NavBarContextType = [
     state,
     {
       setNavBarDidHide(newState: boolean) {
+        if (!newState) {
+          setState("animating", true);
+        }
         setState("navBarDidHide", newState);
       },
       setNavBarDidShow(newState: boolean) {
+        if (!newState) {
+          setState("animating", true);
+        }
         setState("navBarDidShow", newState);
+      },
+      setNavBarAnimating(newState: boolean) {
+        setState("animating", newState);
       },
     },
   ];
