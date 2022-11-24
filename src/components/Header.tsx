@@ -22,7 +22,7 @@ const Header: Component = () => {
           position: "absolute",
         }}
         transition={{ duration: 0.5 }}
-        class="flex h-[10.5vh] min-h-fit w-screen flex-row items-center justify-between bg-white pl-6 pr-8"
+        class="flex h-[10.5vh] min-h-fit w-full flex-row items-center justify-between bg-white pl-6 pr-8"
       >
         <div class="mt-7 mb-9 flex h-full flex-row items-center gap-8">
           <Show when={!state.navBarDidShow}>
