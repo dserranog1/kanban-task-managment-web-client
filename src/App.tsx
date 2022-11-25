@@ -1,6 +1,6 @@
 import NavBar from "./components/navbar/index";
 import { Component } from "solid-js";
-import Header from "./components/Header";
+import Dashboard from "./components/Dashboard";
 import { Route, Routes } from "@solidjs/router";
 
 const App: Component = () => {
@@ -8,7 +8,7 @@ const App: Component = () => {
     <div class="relative flex h-screen flex-row overflow-x-hidden bg-light-grey">
       <NavBar />
       <Routes>
-        <Route path="/:slug" component={Header} />
+        <Route path="/:slug" component={Dashboard} />
       </Routes>
     </div>
   );

@@ -7,7 +7,7 @@ import { classNames } from "../../utils/conditionalStyles";
 
 const theme = {
   switchTheme: {
-    background: { light: "bg-light-grey", dark: "bg-very-dark-gray" },
+    background: { light: "bg-light-grey", dark: "bg-very-dark-grey" },
   },
 };
 

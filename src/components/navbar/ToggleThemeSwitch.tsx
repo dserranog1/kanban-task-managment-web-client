@@ -18,7 +18,7 @@ const ToggleThemeSwitch: Component = () => {
     <button
       onClick={() => handleThemeChange()}
       class={classNames(
-        "flex w-10 rounded-xl bg-main-purple py-1 px-1",
+        "flex w-10 rounded-xl bg-main-purple py-1 px-1 hover:bg-main-purple-hover",
         theme.swtichThemeButton.position[themeState.theme]
       )}
     >
