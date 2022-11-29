@@ -28,6 +28,7 @@
     "vite-plugin-solid": "^2.3.0"
   },
   "dependencies": {
+    "@modular-forms/solid": "^0.8.3",
     "@motionone/solid": "^10.14.3",
     "@solid-primitives/keyed": "^1.1.4",
     "@solidjs/router": "^0.5.0",

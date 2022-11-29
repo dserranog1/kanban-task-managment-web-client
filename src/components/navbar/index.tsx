@@ -9,6 +9,10 @@ import HideSideBarIcon from "./icons/HideSideBarIcon";
 import { useNavBarContext } from "../../providers/NavbarProvider";
 import { useThemeContext } from "../../providers/ThemeProvider";
 import { useAnimationContext } from "../../providers/AnimationProvider";
+import CreateBoardButton from "./CreateBoardButton";
+import Modal from "../Modal";
+import ModalManager from "../ModalManager";
+import CreateBoardModalContent from "../CreateBoardModalContent";
 const theme = {
   nav: {
     background: { light: "white", dark: "#2B2C37" },
@@ -43,76 +47,88 @@ const NavBar: Component = () => {
 
   return (
     <>
-      <Presence>
-        <Show when={navBarState.navBarDidShow}>
-          <Motion.nav
-            initial={{
-              transform: "translateX(-300px)",
-              "background-color": theme.nav.background[themeState.theme],
-              "--tw-border-opacity": 1,
-              "border-color": `rgb(${
-                theme.nav.line[themeState.theme]
-              } / var(--tw-border-opacity))`,
-            }}
-            animate={{
-              transform: "translateX(0px)",
-              "background-color": theme.nav.background[themeState.theme],
-              "--tw-border-opacity": 1,
-              "border-color": `rgb(${
-                theme.nav.line[themeState.theme]
-              } / var(--tw-border-opacity))`,
-            }}
-            exit={{
-              transform: "translateX(-300px)",
-              "background-color": theme.nav.background[themeState.theme],
-              "--tw-border-opacity": 1,
-              "border-color": `rgb(${
-                theme.nav.line[themeState.theme]
-              } / var(--tw-border-opacity))`,
-            }}
-            transition={{
-              duration: animationState.isAnimating ? 0.5 : 0,
-            }}
-            onMotionComplete={() => {
-              const dropAnimationNotComing =
-                navBarState.navBarDidShow && !navBarState.navBarDidHide;
-              if (dropAnimationNotComing) {
-                setNavBarIsAnimating(false);
-                setIsAnimating(false);
-              }
+      <ModalManager>
+        {({ showModal, setShowModal }) => (
+          <>
+            <Modal visible={showModal()} setVisible={setShowModal}>
+              <div class="flex h-fit w-fit flex-col bg-white">
+                <CreateBoardModalContent />
+              </div>
+            </Modal>
+            <Presence>
+              <Show when={navBarState.navBarDidShow}>
+                <Motion.nav
+                  initial={{
+                    transform: "translateX(-300px)",
+                    "background-color": theme.nav.background[themeState.theme],
+                    "--tw-border-opacity": 1,
+                    "border-color": `rgb(${
+                      theme.nav.line[themeState.theme]
+                    } / var(--tw-border-opacity))`,
+                  }}
+                  animate={{
+                    transform: "translateX(0px)",
+                    "background-color": theme.nav.background[themeState.theme],
+                    "--tw-border-opacity": 1,
+                    "border-color": `rgb(${
+                      theme.nav.line[themeState.theme]
+                    } / var(--tw-border-opacity))`,
+                  }}
+                  exit={{
+                    transform: "translateX(-300px)",
+                    "background-color": theme.nav.background[themeState.theme],
+                    "--tw-border-opacity": 1,
+                    "border-color": `rgb(${
+                      theme.nav.line[themeState.theme]
+                    } / var(--tw-border-opacity))`,
+                  }}
+                  transition={{
+                    duration: animationState.isAnimating ? 0.5 : 0,
+                  }}
+                  onMotionComplete={() => {
+                    const dropAnimationNotComing =
+                      navBarState.navBarDidShow && !navBarState.navBarDidHide;
+                    if (dropAnimationNotComing) {
+                      setNavBarIsAnimating(false);
+                      setIsAnimating(false);
+                    }
 
-              !navBarState.navBarDidShow && setNavBarDidHide(true);
-            }}
-            class="z-50 flex h-screen min-w-fit flex-col justify-between border-r-2"
-          >
-            <div>
-              <img
-                class="mt-8 ml-9"
-                src={theme.nav.logo[themeState.theme]}
-                alt="Application Logo"
-              />
-              <h2 class="ml-9 mt-14 mb-5 text-xs font-bold text-medium-grey">
-                ALL BOARDS ({totalBoards})
-              </h2>
-              <For each={boards}>
-                {(board) => <Item sectionTitle={board} />}
-              </For>
-            </div>
-            <div class="mb-12 flex flex-col gap-6">
-              <ToggleTheme />
-              <button
-                onClick={() => navBarIsHiding()}
-                class="group flex flex-row items-center gap-2 py-4 pl-9 hover:mr-6 hover:rounded-tr-full hover:rounded-br-full hover:bg-navbar-hover"
-              >
-                <HideSideBarIcon classes="fill-medium-grey group-hover:fill-main-purple" />
-                <p class="text-md text-medium-grey group-hover:text-main-purple">
-                  Hide Sidebar
-                </p>
-              </button>
-            </div>
-          </Motion.nav>
-        </Show>
-      </Presence>
+                    !navBarState.navBarDidShow && setNavBarDidHide(true);
+                  }}
+                  class="z-30 flex h-screen min-w-fit flex-col justify-between border-r-2"
+                >
+                  <div>
+                    <img
+                      class="mt-8 ml-9"
+                      src={theme.nav.logo[themeState.theme]}
+                      alt="Application Logo"
+                    />
+                    <h2 class="ml-9 mt-14 mb-5 text-xs font-bold text-medium-grey">
+                      ALL BOARDS ({totalBoards})
+                    </h2>
+                    <For each={boards}>
+                      {(board) => <Item sectionTitle={board} />}
+                    </For>
+                    <CreateBoardButton setModalIsActive={setShowModal} />
+                  </div>
+                  <div class="mb-12 flex flex-col gap-6">
+                    <ToggleTheme />
+                    <button
+                      onClick={() => navBarIsHiding()}
+                      class="group flex flex-row items-center gap-2 py-4 pl-9 hover:mr-6 hover:rounded-tr-full hover:rounded-br-full hover:bg-navbar-hover"
+                    >
+                      <HideSideBarIcon classes="fill-medium-grey group-hover:fill-main-purple" />
+                      <p class="text-md text-medium-grey group-hover:text-main-purple">
+                        Hide Sidebar
+                      </p>
+                    </button>
+                  </div>
+                </Motion.nav>
+              </Show>
+            </Presence>
+          </>
+        )}
+      </ModalManager>
       <Presence>
         <Show when={navBarState.navBarDidHide}>
           <Motion.div
@@ -129,7 +145,7 @@ const NavBar: Component = () => {
               }
               !navBarState.navBarDidHide && setNavBarDidShow(true);
             }}
-            class="absolute bottom-8 z-50 w-fit"
+            class="absolute bottom-8 z-30 w-fit"
           >
             <button
               class="rounded-tr-full rounded-br-full bg-main-purple p-5 hover:bg-main-purple-hover"

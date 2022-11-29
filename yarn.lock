@@ -362,6 +362,11 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@modular-forms/solid@^0.8.3":
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/@modular-forms/solid/-/solid-0.8.3.tgz#eb2535566b385184ee2a5a8be87b8c2d42e918f8"
+  integrity sha512-NrgH4BYCQV2Sgvyd3osG3NWEWh7mIsomIzL3kra8+L06BhAiFKWrFy7QS6NAc3YYY3AnXPu88sdbkc+8i3S/AQ==
+
 "@motionone/animation@^10.14.0":
   version "10.14.0"
   resolved "https://registry.yarnpkg.com/@motionone/animation/-/animation-10.14.0.tgz#2f2a3517183bb58d82e389aac777fe0850079de6"
