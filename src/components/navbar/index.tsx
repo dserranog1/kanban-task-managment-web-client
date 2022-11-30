@@ -51,9 +51,7 @@ const NavBar: Component = () => {
         {({ showModal, setShowModal }) => (
           <>
             <Modal visible={showModal()} setVisible={setShowModal}>
-              <div class="flex h-fit w-fit flex-col bg-white">
-                <CreateBoardModalContent />
-              </div>
+              <CreateBoardModalContent />
             </Modal>
             <Presence>
               <Show when={navBarState.navBarDidShow}>
