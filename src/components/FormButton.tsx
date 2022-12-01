@@ -1,4 +1,4 @@
-import { Component } from "solid-js";
+import { Component, JSX } from "solid-js";
 import { classNames } from "../utils/conditionalStyles";
 
 interface Props {
@@ -6,6 +6,7 @@ interface Props {
   backgroundColor: string;
   textColor: string;
   handleOnClick: () => void;
+  type: JSX.ButtonHTMLAttributes<HTMLButtonElement>["type"];
 }
 const FormButton: Component<Props> = (props) => {
   return (
@@ -15,6 +16,7 @@ const FormButton: Component<Props> = (props) => {
         `${props.textColor} ${props.backgroundColor}`
       )}
       onClick={() => props.handleOnClick()}
+      type={props.type}
     >
       {props.text}
     </button>

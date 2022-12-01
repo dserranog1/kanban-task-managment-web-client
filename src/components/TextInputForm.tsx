@@ -22,14 +22,14 @@ export function TextInput(props: TextInputProps) {
     <div
       class={classNames(
         "flex flex-col items-start justify-center gap-2",
-        props.customWidth?.length ? props.customWidth : "w-[380px]"
+        props.customWidth?.length ? props.customWidth : "w-[416px]"
       )}
     >
       <InputLabel name={props.name} label={props.label} />
       <div
         class={classNames(
           "flex w-full flex-row items-center justify-between rounded-md border border-solid bg-white py-2 px-4",
-          props.error ? "border-input-error" : "border-medium-grey"
+          props.error?.length ? "border-input-error" : "border-medium-grey"
         )}
       >
         <input
@@ -43,7 +43,7 @@ export function TextInput(props: TextInputProps) {
           )}
           placeholder={props.placeholder}
         />
-        {props.error && (
+        {props.error?.length && (
           <div
             class="text-center text-xs font-medium text-input-error"
             id={`${props.name}-error`}

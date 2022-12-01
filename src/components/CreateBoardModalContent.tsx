@@ -20,7 +20,7 @@ type BoardForm = {
 };
 
 const CreateBoardModalContent: Component = () => {
-  const createBoardForm = createForm<BoardForm>({});
+  const createBoardForm = createForm<BoardForm>();
 
   const createBoard = () => {
     // TODO: send payload to the backend
@@ -31,7 +31,7 @@ const CreateBoardModalContent: Component = () => {
         <h2 class="mb-6 text-lg font-bold text-light-dark">Add New Board</h2>
         <Form
           of={createBoardForm}
-          onSubmit={() => console.log("sending form..")} //TODO send backend payload
+          onSubmit={(values) => console.log(values)} //TODO send backend payload
         >
           <Field
             name="boardName"
@@ -51,7 +51,7 @@ const CreateBoardModalContent: Component = () => {
           </Field>
           <FieldArray of={createBoardForm} name="columns">
             {(fieldArray) => (
-              <>
+              <div id={fieldArray.name}>
                 <Show when={fieldArray.items.length}>
                   <InputLabel
                     name={fieldArray.name}
@@ -86,7 +86,7 @@ const CreateBoardModalContent: Component = () => {
                           >
                             <IconCross
                               classes={
-                                field.error
+                                field.error.length
                                   ? "fill-input-error"
                                   : "fill-medium-grey"
                               }
@@ -97,20 +97,20 @@ const CreateBoardModalContent: Component = () => {
                     </Field>
                   )}
                 </For>
-              </>
+              </div>
             )}
           </FieldArray>
           <FormButton
             backgroundColor="bg-main-purple/10"
             textColor="text-main-purple"
-            handleOnClick={() => {
-              insert(createBoardForm, "columns");
-            }}
+            handleOnClick={() => insert(createBoardForm, "columns")}
+            type="button"
             text="+ Add New Column"
           />
           <FormButton
             backgroundColor="bg-main-purple"
             textColor="text-white"
+            type="submit"
             text="Create New Board"
             handleOnClick={() => {
               handleSubmit(createBoardForm, createBoard);
